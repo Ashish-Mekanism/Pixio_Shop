@@ -1,6 +1,6 @@
 import express from "express";
 import userRouter from "./V1/routes/userRouter.js";
-// import productRouter from "./V1/routes/productRouter.js";
+import productRouter from "./V1/routes/productRouter.js";
 import mongoose from "mongoose";
 
 const app = express();
@@ -11,7 +11,7 @@ app.get("/api/check", (req, res) => {
 });
 
 app.use("/v1/user", userRouter);
-// app.use("/v1/product", productRouter);
+app.use("/v1/product", productRouter);
 
 mongoose
   .connect("mongodb://localhost:27017/Pixo-Shop")
