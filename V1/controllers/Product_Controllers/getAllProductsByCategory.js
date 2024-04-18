@@ -1,4 +1,4 @@
-import { productData } from "../utility/productData.js";
+import { productData } from "../../utility/productData.js";
 
 export const getAllProductsByCategory = (req, res) => {
   const { category } = req.params;

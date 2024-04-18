@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
-import UserModel from "../models/userModel.js";
-import GenerateAccessToken from "../utils/genrates_token.js";
+import UserModel from "../../models/userModel.js";
+import GenerateAccessToken from "../../utils/genrates_token.js";
 
 export const signin = async (req, res) => {
   try {

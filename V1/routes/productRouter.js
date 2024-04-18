@@ -1,8 +1,8 @@
 import express from "express";
-import { getAllProducts } from "../controllers/getAllProducts.js";
-import { getCustomProduct } from "../controllers/getCustomProduct.js";
-import { getAllProductsByCategory } from "../controllers/getAllProductsByCategory.js";
-import { getAllProductsByPrice } from "../controllers/getProductByPrice.js";
+import { getAllProducts } from "../controllers/Product_Controllers/getAllProducts.js";
+import { getCustomProduct } from "../controllers/Product_Controllers/getCustomProduct.js";
+import { getAllProductsByCategory } from "../controllers/Product_Controllers/getAllProductsByCategory.js";
+import { getAllProductsByPrice } from "../controllers/Product_Controllers/getProductByPrice.js";
 
 const productRouter = express.Router();
 

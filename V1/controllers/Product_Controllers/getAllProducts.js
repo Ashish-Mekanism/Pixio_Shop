@@ -1,4 +1,4 @@
-import { productData } from "../utility/productData.js";
+import { productData } from "../../utility/productData.js";
 
 export const getAllProducts = (req, res) => {
   const page = req.query.page || 1;
