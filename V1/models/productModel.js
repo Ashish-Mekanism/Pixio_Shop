@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-const Iproduct = new Schema({
+const ProductSchema = new Schema({
   title: { type: String, required: true },
   price: { type: Number, required: true },
   images: [{ type: String }],
@@ -16,6 +16,6 @@ const Iproduct = new Schema({
   seller: { type: Schema.Types.ObjectId, ref: "User" },
 });
 
-const ProductModel = mongoose.model("Product", Iproduct);
+const ProductModel = mongoose.model("Product", ProductSchema);
 
 export default ProductModel;
