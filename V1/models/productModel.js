@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import User from "../models/userModel.js";
 
 const { Schema } = mongoose;
 
@@ -13,7 +14,7 @@ const ProductSchema = new Schema({
     count: { type: Number, default: 0 },
   },
   category: { type: String, required: true },
-  seller: { type: Schema.Types.ObjectId, ref: "User" },
+  seller: { type: Schema.Types.ObjectId, ref: User },
 });
 
 const ProductModel = mongoose.model("Product", ProductSchema);
