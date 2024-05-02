@@ -7,7 +7,7 @@ const IUser = new Schema({
   password: { type: String, required: true },
 
   username: { type: String, required: true },
-  name: { type: String, required: true },
+  name: { type: String },
   // role: { type: String, required: true, default: "buyer" },
   // store_name: { type: String },
 });

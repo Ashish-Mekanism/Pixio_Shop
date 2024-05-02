@@ -1,14 +1,14 @@
 import express from "express";
 import { getAllProducts } from "../controllers/Product_Controllers/getAllProducts.js";
-import { getCustomProduct } from "../controllers/Product_Controllers/getCustomProduct.js";
-import { getAllProductsByCategory } from "../controllers/Product_Controllers/getAllProductsByCategory.js";
-import { getAllProductsByPrice } from "../controllers/Product_Controllers/getProductByPrice.js";
+
+import { getAllCategories } from "../controllers/Product_Controllers/get_All_Products_Category.js";
 
 const productRouter = express.Router();
 
-productRouter.get("/title/:title", getCustomProduct);
-productRouter.get("/category/:category?", getAllProductsByCategory);
-productRouter.get("/:price", getAllProductsByPrice);
-productRouter.get("/", getAllProducts);
+productRouter.get("/category", getAllCategories);
+
+productRouter.post("/:category?/:product_name?", getAllProducts);
 
 export default productRouter;
+
+// product/T-shirts/Pure Cotton?minPrice=200&maxPrice=500&page=1&per_page=2

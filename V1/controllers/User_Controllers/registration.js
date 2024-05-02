@@ -21,7 +21,7 @@ export const registration = async (req, res) => {
       password: hashedPassword,
     });
 
-    const token = GenerateAccessToken(createdUser.email);
+    const token = GenerateAccessToken(createdUser._id);
 
     const userWithToken = {
       ...createdUser.toJSON(),

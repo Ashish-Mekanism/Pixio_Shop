@@ -8,16 +8,14 @@ export const listing_all_wishlist = async (req, res) => {
     );
 
     if (wishlistProducts.length > 0) {
-      const productOfWishlist = wishlistProducts.map((product) => ({
-        details: product.productId,
-      }));
-
-      return res.status(200).json(productOfWishlist);
+      return res.status(200).json(wishlistProducts);
     } else {
-      return res.status(404).send("No products found in the wishlist.");
+      return res
+        .status(404)
+        .json({ message: "No products found in the wishlist." });
     }
   } catch (error) {
     console.error("Error fetching cart products:", error);
-    return res.status(500).send("Internal Server Error");
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
