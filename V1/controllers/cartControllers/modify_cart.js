@@ -14,7 +14,7 @@ export const modify_cart = async (req, res) => {
     });
 
     // If the item is already in the cart, update its quantity
-    cartItem.product_quantity = quantity;
+    cartItem.product_quantity += quantity;
 
     await cartItem.save();
     return res.status(200).json(cartItem);
