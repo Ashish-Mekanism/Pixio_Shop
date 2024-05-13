@@ -20,7 +20,7 @@ export const modify_cart = async (req, res) => {
     return res.status(200).json(cartItem);
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ message: "Internal Server Error" });
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
