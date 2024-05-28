@@ -1,31 +1,15 @@
-// import Product from "../../models/productModel.js";
-// import { getPaginatedData } from "../../utils/pagination_utils.js";
-
-// export const getAllProducts = async (req, res) => {
-//   try {
-//     const { page, per_page } = req.query;
-
-//     const products = await Product.find();
-//     const getAllProduct = getPaginatedData(products, page, per_page, req);
-
-//     const total = products.length;
-//     console.log(getAllProduct.length);
-
-//     return res.status(200).json({
-//       total,
-//       data: getAllProduct,
-//     });
-//   } catch (error) {
-//     return res.status(500).json({ error: "Internal Server Error" });
-//   }
-// };
-
 import Product from "../../models/productModel.js";
 import { getPaginatedData } from "../../utils/pagination_utils.js";
 
 export const getAllProducts = async (req, res) => {
-  const { category, title } = req.params;
-  const { minPrice, maxPrice, page, per_page } = req.query;
+  const { filterSearchValues, page, per_page } = req.body;
+  if (!filterSearchValues) {
+    return res
+      .status(400)
+      .json({ error: "Missing filterSearchValues in the request body" });
+  }
+
+  const { category, search_query, minPrice, maxPrice } = filterSearchValues;
 
   try {
     let query = {};
@@ -35,26 +19,23 @@ export const getAllProducts = async (req, res) => {
         $regex: new RegExp(category, "i"),
       };
     }
-    if (title) {
+    if (search_query) {
       query.title = {
-        $regex: new RegExp(title, "i"),
+        $regex: new RegExp(search_query, "i"),
       };
     }
 
     if (minPrice !== undefined && maxPrice !== undefined) {
-      if (
-        isNaN(minPrice) ||
-        isNaN(maxPrice) ||
-        minPrice < 0 ||
-        maxPrice < 0 ||
-        minPrice >= maxPrice
-      ) {
+      const min = parseFloat(minPrice);
+      const max = parseFloat(maxPrice);
+      if (isNaN(min) || isNaN(max) || min < 0 || max < 0 || min >= max) {
         return res.status(400).json({
           error: "Invalid price range",
         });
       }
-      query.price = { $gte: minPrice, $lte: maxPrice };
+      query.price = { $gte: min, $lte: max };
     }
+
     const products = await Product.find(query);
 
     if (!products.length) {
@@ -64,7 +45,7 @@ export const getAllProducts = async (req, res) => {
     const formattedProducts = category
       ? products.map((product) => ({
           category: product.category,
-          title: product.title,
+          search_query: product.title,
           discount: product.discount,
           price: product.price,
           images: product.images[0],
@@ -83,6 +64,8 @@ export const getAllProducts = async (req, res) => {
       data: paginatedProducts,
     });
   } catch (error) {
-    return res.status(500).json({ error: "Internal Server Error" });
+    return res
+      .status(500)
+      .json({ error: "Internal Server Error", message: error.message });
   }
 };

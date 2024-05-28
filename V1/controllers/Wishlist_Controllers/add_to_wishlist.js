@@ -9,7 +9,7 @@ export const add_to_wishlist = async (req, res) => {
       productId: product_id,
       userId,
     });
-    // Wishlist already exists
+    // If Wishlist already exists
     if (existingProduct) {
       return res.status(200).json({ message: "Wishlist already exists" });
     } else {

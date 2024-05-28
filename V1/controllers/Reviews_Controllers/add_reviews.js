@@ -56,7 +56,7 @@ export const add_reviews = async (req, res) => {
     if (!hasBought) {
       res
         .status(403)
-        .json({ error: "You can only review products you have bought" });
+        .json({ error: "You can only review products that you have bought" });
       return;
     }
 
@@ -66,7 +66,9 @@ export const add_reviews = async (req, res) => {
     });
 
     if (existingReviews) {
-      res.status(403).json({ error: "You already reviewed this product" });
+      res
+        .status(403)
+        .json({ error: "You have  already reviewed this product" });
     } else {
       const newReview = new ReviewModel({
         rating: rating,
@@ -75,7 +77,7 @@ export const add_reviews = async (req, res) => {
         userId: userId,
       });
       await newReview.save();
-      res.status(200).json({ message: "Review added successfully" });
+      res.status(201).json({ message: "Review added successfully" });
     }
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });

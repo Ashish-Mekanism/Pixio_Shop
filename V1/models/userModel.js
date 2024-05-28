@@ -6,7 +6,7 @@ const IUser = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
 
-  username: { type: String, required: true },
+  username: { type: String, required: true, unique: true },
   name: { type: String },
   // role: { type: String, required: true, default: "buyer" },
   // store_name: { type: String },

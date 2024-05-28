@@ -7,7 +7,7 @@ const productRouter = express.Router();
 
 productRouter.get("/category", getAllCategories);
 
-productRouter.post("/:category?/:product_name?", getAllProducts);
+productRouter.post("/", getAllProducts);
 
 export default productRouter;
 

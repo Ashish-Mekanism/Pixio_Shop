@@ -2,6 +2,7 @@ import Order from "../../models/orderModel.js";
 
 export const get_all_order_items = async (req, res) => {
   const userId = req.user.id;
+
   try {
     const order_items = await Order.find({ user: userId }).populate({
       path: "items.productId",
